@@ -2,11 +2,13 @@ package com.bank_api.entities;
 
 import com.bank_api.entities.enums.Role;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class User {
 
