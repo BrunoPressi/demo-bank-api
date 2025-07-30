@@ -3,6 +3,7 @@ package com.bank_api.controllers;
 import com.bank_api.dto.UserCreateDTO;
 import com.bank_api.dto.UserResponseDTO;
 import com.bank_api.services.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserResponseDTO> newUser(@RequestBody UserCreateDTO userCreateDTO) {
+    public ResponseEntity<UserResponseDTO> newUser(@Valid @RequestBody UserCreateDTO userCreateDTO) {
         UserResponseDTO userResponseDTO = userService.newUser(userCreateDTO);
 
         String location = ServletUriComponentsBuilder
