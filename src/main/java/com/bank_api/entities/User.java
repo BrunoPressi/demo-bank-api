@@ -24,6 +24,6 @@ public class User {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Role role = Role.ROLE_CUSTOMER;
 
 }

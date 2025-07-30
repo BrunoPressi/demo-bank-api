@@ -1,5 +1,8 @@
 package com.bank_api.services;
 
+import com.bank_api.dto.UserCreateDTO;
+import com.bank_api.dto.UserResponseDTO;
+import com.bank_api.dto.mapper.UserMapper;
 import com.bank_api.entities.User;
 import com.bank_api.entities.enums.Role;
 import com.bank_api.repositories.UserRepository;
@@ -21,15 +24,15 @@ public class UserServiceTest {
     private UserService userService;
 
     @Test
-    void newUserTest() {
+    void CreateNewUserSuccess() {
+        UserCreateDTO userCreateDTO = new UserCreateDTO("test@gmail.com", "123456");
+        User user = UserMapper.parseObject(userCreateDTO, User.class);
 
-        User user = new User(1L,"test@gmail.com", "123456", Role.ROLE_CUSTOMER);
         Mockito.when(userRepository.save(Mockito.any(User.class))).thenReturn(user);
 
-        User result = userService.newUser(user);
-        Assertions.assertEquals(1L, result.getId());
+        UserResponseDTO result = userService.newUser(userCreateDTO);
+        Assertions.assertNotNull(result);
         Assertions.assertEquals("test@gmail.com", result.getEmail());
-        Assertions.assertEquals("123456", result.getPassword());
     }
 
 }
