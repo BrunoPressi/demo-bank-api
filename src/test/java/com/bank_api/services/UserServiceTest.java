@@ -12,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
@@ -20,6 +21,7 @@ public class UserServiceTest {
     @Mock
     private UserRepository userRepository;
 
+    @Spy
     @InjectMocks
     private UserService userService;
 
@@ -31,6 +33,8 @@ public class UserServiceTest {
         Mockito.when(userRepository.save(Mockito.any(User.class))).thenReturn(user);
 
         UserResponseDTO result = userService.newUser(userCreateDTO);
+        Mockito.verify(userRepository).save(user);
+
         Assertions.assertNotNull(result);
         Assertions.assertEquals("test@gmail.com", result.getEmail());
     }

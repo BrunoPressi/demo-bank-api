@@ -1,27 +1,33 @@
 package com.bank_api.controllers;
 
-import com.bank_api.dto.UserCreateDTO;
-import com.bank_api.dto.UserResponseDTO;
-import com.bank_api.services.UserService;
+import com.bank_api.repositories.UserRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest
-public class UserControllerTest {
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureMockMvc
+@ActiveProfiles("test")
+public class UserControllerIT {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @MockitoBean
-    private UserService userService;
+    @Autowired
+    private UserRepository userRepository;
+
+    @BeforeEach
+    void setup() {
+        userRepository.deleteAll();
+    }
 
     @Test
     void createNewUserReturn201() throws Exception {
@@ -32,9 +38,6 @@ public class UserControllerTest {
                 "password": "123456"
             }
             """;
-
-        UserResponseDTO userResponseDTO = new UserResponseDTO(1L, "john@gmail.com");
-        Mockito.when(userService.newUser(Mockito.any(UserCreateDTO.class))).thenReturn(userResponseDTO);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/users")
                 .contentType(MediaType.APPLICATION_JSON)
