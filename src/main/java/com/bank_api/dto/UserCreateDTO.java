@@ -12,13 +12,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserCreateDTO {
 
-    @NotBlank
-    @Email
-    @Size(max = 50, min = 3)
+    @NotBlank(message = "Cannot be null or contain whitespace")
+    @Email(message = "Invalid email")
+    @Size(max = 50, min = 3, message = "Must be greater than 3 characters and less than 50 characters")
     private String email;
 
-    @NotBlank
-    @Size(min = 8, max = 12)
+    @NotBlank(message = "Cannot be null or contain whitespace")
+    @Size(min = 8, max = 12, message = "Must be greater than 8 characters and less than 12 characters")
     private String password;
 
 }

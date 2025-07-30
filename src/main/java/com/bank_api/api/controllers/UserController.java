@@ -1,4 +1,4 @@
-package com.bank_api.controllers;
+package com.bank_api.api.controllers;
 
 import com.bank_api.dto.UserCreateDTO;
 import com.bank_api.dto.UserResponseDTO;
