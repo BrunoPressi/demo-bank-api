@@ -1,0 +1,1 @@
+insert into app_user (id, email, password, role) values (90L, 'john@gmail.com', '12345678', 'ROLE_CUSTOMER');
