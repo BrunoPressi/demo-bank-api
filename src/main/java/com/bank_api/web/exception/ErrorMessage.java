@@ -1,4 +1,4 @@
-package com.bank_api.api.exception;
+package com.bank_api.web.exception;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
