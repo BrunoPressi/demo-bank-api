@@ -2,12 +2,15 @@ package com.bank_api.entities;
 
 import com.bank_api.entities.enums.Role;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Table(name = "app_user")
 public class User {
 
     @Id
@@ -22,6 +25,9 @@ public class User {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Role role = Role.ROLE_CUSTOMER;
+
+    @Column
+    private boolean emailIsValid = false;
 
 }
