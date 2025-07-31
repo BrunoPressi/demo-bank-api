@@ -44,5 +44,4 @@ public class UserServiceTest {
         Assertions.assertEquals("test@gmail.com", result.getEmail());
     }
 
-
 }

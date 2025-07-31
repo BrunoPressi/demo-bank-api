@@ -1,4 +1,4 @@
-package com.bank_api.api.exception;
+package com.bank_api.web.exception;
 
 import com.bank_api.exceptions.DuplicateEmailException;
 import jakarta.servlet.http.HttpServletRequest;
