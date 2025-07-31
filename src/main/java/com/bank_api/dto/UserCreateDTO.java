@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class UserCreateDTO {
 
     @NotBlank(message = "Cannot be null or contain whitespace")
-    @Email(message = "Invalid email")
+    @Email(regexp = ".+@.+\\..+", message = "Invalid email format")
     @Size(max = 50, min = 3, message = "Must be greater than 3 characters and less than 50 characters")
     private String email;
 

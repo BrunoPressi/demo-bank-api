@@ -14,6 +14,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.core.MethodParameter;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
@@ -38,5 +43,6 @@ public class UserServiceTest {
         Assertions.assertNotNull(result);
         Assertions.assertEquals("test@gmail.com", result.getEmail());
     }
+
 
 }

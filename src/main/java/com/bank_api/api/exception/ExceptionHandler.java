@@ -1,5 +1,6 @@
 package com.bank_api.api.exception;
 
+import com.bank_api.exceptions.DuplicateEmailException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,20 @@ public class ExceptionHandler {
         );
 
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(errorMessage);
+    }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler(DuplicateEmailException.class)
+    public ResponseEntity<ErrorMessage> duplicateEmailException(HttpServletRequest request, Exception e) {
+
+        ErrorMessage errorMessage = new ErrorMessage(
+                LocalDateTime.now(),
+                request.getRequestURI(),
+                e.getMessage(),
+                HttpStatus.CONFLICT.value(),
+                HttpStatus.CONFLICT.getReasonPhrase()
+        );
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorMessage);
     }
 
 }
