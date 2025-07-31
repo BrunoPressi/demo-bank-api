@@ -27,4 +27,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role = Role.ROLE_CUSTOMER;
 
+    @Column
+    private boolean emailIsValid = false;
+
 }
