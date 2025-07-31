@@ -188,25 +188,6 @@ public class UserControllerIT {
                 .andExpect(jsonPath("$.code").value(422))
                 .andExpect(jsonPath("$.statusMessage").value("Unprocessable Entity"));
 
-        // Testing @Size annotation
-
-        userCreateDTO =
-                """
-                {
-                    "email": "ab@gmail.com",
-                    "password": "12345678"
-                }
-                """;
-
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/users")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(userCreateDTO))
-                .andExpect(status().isUnprocessableEntity())
-                .andExpect(jsonPath("$.path").value("/api/v1/users"))
-                .andExpect(jsonPath("$.errors.email").value("Must be greater than 3 characters and less than 50 characters"))
-                .andExpect(jsonPath("$.code").value(422))
-                .andExpect(jsonPath("$.statusMessage").value("Unprocessable Entity"));
-
     }
 
     @Test

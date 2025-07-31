@@ -2,10 +2,11 @@ package com.bank_api.api.controllers;
 
 import com.bank_api.dto.UserCreateDTO;
 import com.bank_api.dto.UserResponseDTO;
+import com.bank_api.dto.validator.ValidationOrder;
 import com.bank_api.services.UserService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserResponseDTO> newUser(@Valid @RequestBody UserCreateDTO userCreateDTO) {
+    public ResponseEntity<UserResponseDTO> newUser(@Validated(ValidationOrder.class) @RequestBody UserCreateDTO userCreateDTO) {
         UserResponseDTO userResponseDTO = userService.newUser(userCreateDTO);
 
         String location = ServletUriComponentsBuilder
