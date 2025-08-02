@@ -1,5 +1,5 @@
 spring.datasource:
-  url: jdbc:mysql://localhost:3306/bank-api?serverTimezone=UTC&useTimezone=true&allowPublicKeyRetrieval=true
+  url: jdbc:mysql://localhost:3306/bank-api?serverTimezone=America/Sao_Paulo&useTimezone=true&allowPublicKeyRetrieval=true
   username: root
   password: 4525
   driver-class-name: com.mysql.cj.jdbc.Driver
@@ -11,3 +11,17 @@ spring.jpa:
   properties:
     hibernate:
   open-in-view: false
+
+# Email config
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: brunopressi2012@gmail.com
+    password: tflg hael tppj ealk
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true

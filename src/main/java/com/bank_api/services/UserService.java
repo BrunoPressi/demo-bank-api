@@ -5,6 +5,7 @@ import com.bank_api.dto.UserResponseDTO;
 import com.bank_api.dto.mapper.UserMapper;
 import com.bank_api.entities.User;
 import com.bank_api.exceptions.DuplicateEmailException;
+import com.bank_api.exceptions.EntityNotFoundException;
 import com.bank_api.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -27,6 +28,19 @@ public class UserService {
             throw new DuplicateEmailException(String.format("Email |%s| already registered.", user.getEmail()));
         }
         return UserMapper.parseObject(user, UserResponseDTO.class);
+    }
+
+    @Transactional(readOnly = true)
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email).orElseThrow(
+                () -> new EntityNotFoundException(String.format("User |%s| not found", email))
+        );
+    }
+
+    @Transactional(readOnly = false)
+    public void updateValidEmail(String email) {
+        User user = findByEmail(email);
+        user.setEmailIsValid(true);
     }
 
 }
